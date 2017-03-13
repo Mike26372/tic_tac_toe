@@ -4,7 +4,7 @@ var prompt = Promise.promisifyAll(require('prompt'));
 
 
 class TicTacToe {
-  constructor(player1, player2) {
+  constructor() {
     this.board = {
       '1': 0,
       '2': 0,
@@ -27,6 +27,7 @@ class TicTacToe {
       ['1', '5', '9'],
       ['3', '5', '7'],
     ];
+
     this.player1 = null;
     this.player2 = null;
     // Sets current player to true
@@ -35,8 +36,6 @@ class TicTacToe {
     this.currentPlayer = true;
     this.player1Marker = 'X';
     this.player2Marker = 'O';
-
-    this.gameHasWinner = false;
     this.errors = {
       1: 'Spot Chosen Error'
     };
@@ -65,7 +64,7 @@ class TicTacToe {
 
   displayCurrentPlayer() {
     let { currentPlayer, player1, player2 } = this;
-    // console.log(`CURRENT PLAYER: ${currentPlayer}`);
+
     if (currentPlayer) {
       console.log(`Player One: ${player1}'s turn`);
     } else {
@@ -86,9 +85,11 @@ class TicTacToe {
         // Check if spot is taken
         if (board[spot]) {
           // If spot taken, ask them to pick another spot
+            // Use reject to skip next steps
           console.error('Spot chosen has already been filled, please choose another spot');
           reject(errors[1]);
         } else {
+          // If spot is not taken, mark the spot with the current player's marker
           board[spot] = marker;
         }
         resolve(result.spot);
@@ -119,6 +120,7 @@ class TicTacToe {
           return acc && curr;
         }, true);
       }, false);
+
       resolve(winner);
     });
   }
@@ -158,14 +160,12 @@ class TicTacToe {
     .then(result => {
       this.player1 = result.player1;
       this.player2 = result.player2;
-      let { player1, player2, currentPlayer, gameHasWinner } = this;
       this.startNextTurn();
     })
     .catch(err => {
       console.error('GAME CANCELLED!');
     });
   }
-  
 }
 
 var tictactoe = new TicTacToe();
