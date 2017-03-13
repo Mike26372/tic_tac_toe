@@ -10,3 +10,5 @@ To start the game, run:
 ```javascript
 npm start
 ```
+
+Enjoy playing!
