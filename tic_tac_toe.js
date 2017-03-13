@@ -86,7 +86,7 @@ class TicTacToe {
         // Check if spot is taken
         if (board[spot]) {
           // If spot taken, ask them to pick another spot
-          console.log('Spot chosen has already been filled, please choose another spot');
+          console.error('Spot chosen has already been filled, please choose another spot');
           reject(errors[1]);
         } else {
           board[spot] = marker;
