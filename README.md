@@ -2,7 +2,11 @@
 Tic Tac Toe Toy Problem
 
 Before playing, please pull down the repo and run:
-    npm install
+```javascript
+npm install
+```
 
 To start the game, run:
-    npm start
+```javascript
+npm start
+```
